@@ -1,13 +1,50 @@
+//filter, search, and pull 
+
 window.onload = function() {
-	console.log(pullPokemon(10));
+	var pokemon = pullPokemon(100);
+
+	$('#tmp').text(pokemon);
 }
 
 // pull x random pokemon from the API
-function pullPokemon(x){
+function pullPokemon(){
 	var pokemon = [];
-	for (var i = 1; i <= x; i++) {
-		var data = $.getJSON("http://pokeapi.co/api/v2/pokemon/" + x);
-		pokemon.append(data);
-	}
-	return pokemon;
+	$.getJSON("https://info2300.coecis.cornell.edu/users/bz82sp17/www/hw1/pokemon.json", function(data){
+		console.log(data);
+	});
+
+	// var async_request=[];
+	// var responses=[];
+	// for(var i = 1; i <= x; i++)
+	// {
+	//     // you can push  any aysnc method handler
+	//     async_request.push($.ajax({
+	//         url:'http://pokeapi.co/api/v2/pokemon/'+i, // your url
+	//         method:'post', // method GET or POST
+	//         success: function(data){
+	//             console.log('success of ajax response')
+	//             responses.push(data);
+	//         }
+	//     }));
+	// }
+
+
+	// $.when.apply(null, async_request).done( function(){
+	//     // all done
+	//     console.log('all request completed')
+	//     console.log(responses);
+	// });
+
+
+	// var settings = {
+	//     "async": true,
+	//     "crossDomain": true,
+	//     "url": "http://pokeapi.co/api/v2/pokemon/"+x,
+	//     "method": "GET",
+	//     "headers": {},
+	// }
+
+	// $.ajax(settings).done(function (response) {
+	//     return(response);
+	// });
 }
