@@ -1,50 +1,60 @@
 //filter, search, and pull 
 
 window.onload = function() {
-	var pokemon = pullPokemon(100);
-
-	$('#tmp').text(pokemon);
+	
 }
 
-// pull x random pokemon from the API
+// pull 20 pokemon from the API
 function pullPokemon(){
-	var pokemon = [];
-	$.getJSON("https://info2300.coecis.cornell.edu/users/bz82sp17/www/hw1/pokemon.json", function(data){
-		console.log(data);
-	});
+	//pokemon variable is stored in pokemon.json
+	return pokemon;
+}
 
-	// var async_request=[];
-	// var responses=[];
-	// for(var i = 1; i <= x; i++)
-	// {
-	//     // you can push  any aysnc method handler
-	//     async_request.push($.ajax({
-	//         url:'http://pokeapi.co/api/v2/pokemon/'+i, // your url
-	//         method:'post', // method GET or POST
-	//         success: function(data){
-	//             console.log('success of ajax response')
-	//             responses.push(data);
-	//         }
-	//     }));
-	// }
+// search for pokemon name
+function searchPokemon(name){
+	// if the pokemon is not in the database, return error
+	if (!pokemon[name]){
+		return "Pokemon not found";
+	}
+	return pokemon[name];
+}
 
+// returns sprite url of pokemon if it exists
+function pokemonImage(name){
+	// if the pokemon is not in the database, return error
+	if (!pokemon[name]) {
+		return "Pokemon not found";
+	}
+	return pokemon[name]['sprites']['front_default'];
+}
 
-	// $.when.apply(null, async_request).done( function(){
-	//     // all done
-	//     console.log('all request completed')
-	//     console.log(responses);
-	// });
+// get pokemon moves if pokemon exists
+function pokemonMoves(name){
+	// if the pokemon is not in the database, return error
+	if (!pokemon[name]) {
+		return "Pokemon not found";
+	}
+	var moves = pokemon[name]['moves'];
+	var moveNames = [];
+	for (var i = 0; i < moves.length; i++) {
+		moveNames.push(moves[i]['move']['name']);
+	}
+	return moveNames;
+}
 
-
-	// var settings = {
-	//     "async": true,
-	//     "crossDomain": true,
-	//     "url": "http://pokeapi.co/api/v2/pokemon/"+x,
-	//     "method": "GET",
-	//     "headers": {},
-	// }
-
-	// $.ajax(settings).done(function (response) {
-	//     return(response);
-	// });
+// filter pokemon with the move 'move'
+function getPokemonWithMove(move){
+	// pokemon with the move
+	var hasMove = {};
+	// get the pokemon (the keys)
+	var poke = Object.keys(pokemon);
+	// check each pokemon for the move
+	for (var i = 0; i < poke.length; i++) {
+		var moves = pokemonMoves(poke[i]);
+		// if this pokemon has the move, add it to the return list
+		if (moves.indexOf(move) != -1) {
+			hasMove[poke[i]] = pokemon[poke[i]];
+		}
+	}
+	return hasMove;
 }
