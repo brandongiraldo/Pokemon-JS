@@ -102,7 +102,77 @@ window.onload = function() {
 		For Types, most types first
 	**/
 	$(".filter-select").change(function() {
-		console.log($(".filter-select :selected").text());
+
+		$(".results .row div").remove();
+		var filter = $(".filter-select :selected").text();
+
+		console.log(filter);
+		var newRequest = $.ajax({
+			type: 'GET',
+			url: "data/pokemon.json",
+			dataType: "json"
+		});
+
+		// This resource may be helpful in organizing the data
+		//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+		newRequest.done(function(data) {
+			//This is your array of pokemon.
+			var array = $.map(data, function(value, index) {
+	    		return [value];
+			});
+			console.log(array);
+
+			if (filter == "Name"){
+				function compareString(a, b) {
+				  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+				  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+				  if (nameA < nameB) {
+				    return -1;
+				  }
+				  if (nameA > nameB) {
+				    return 1;
+				  }
+				  // names must be equal
+				  return 0;
+				}
+				array.sort(compareString);
+			}
+			else if (filter == "Weight"){
+				function compareWeight(a,b){
+					return b.weight-a.weight;
+				}
+				array.sort(compareWeight);
+			}
+			else if (filter == "Stats"){
+				function compareStats(a,b){
+					var aStats = 0;
+					var bStats = 0;
+					for (var i = a.stats.length - 1; i >= 0; i--) {
+						aStats += a.stats[i]['base_stats'];
+					}
+					for (var i = b.stats.length - 1; i >= 0; i--) {
+						bStats += b.stats[i]['base_stats'];
+					}
+					return bStats - aStats;
+				}	
+				array.sort(compareStats);
+			}
+			else if (filter == "Types"){
+				function compareTypes(a,b){
+					var aTypes = a.types.length;
+					var bTypes = b.types.length;
+					return bTypes-aTypes;
+				}
+				array.sort(compareTypes);
+			}
+
+			//This is how we make the pokemon appear.
+			array.forEach(function(item) {
+				var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
+				$(".results .row").append(pokemon.render);	
+			});
+		});
 	})
 
 }
