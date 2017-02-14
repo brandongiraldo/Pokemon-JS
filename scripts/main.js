@@ -106,7 +106,6 @@ window.onload = function() {
 		$(".results .row div").remove();
 		var filter = $(".filter-select :selected").text();
 
-		console.log(filter);
 		var newRequest = $.ajax({
 			type: 'GET',
 			url: "data/pokemon.json",
