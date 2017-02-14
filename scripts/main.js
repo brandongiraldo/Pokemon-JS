@@ -5,8 +5,6 @@ window.onload = function() {
 		dataType: "json"
 	});
 
-
-
 	request.done(function(data) {
 		//This is your array of pokemon.
 		var array = $.map(data, function(value, index) {
@@ -18,10 +16,10 @@ window.onload = function() {
 			var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
 			$(".results .row").append(pokemon.render);
 		});
-
 	});
 
 	/**
+		Question 1
 		10 points
 		Easy 
 		Change the size of the weight and items elements
@@ -34,6 +32,7 @@ window.onload = function() {
 	});
 
 	/** 
+		Question 2
 		10 points
 		Easy 
 		Show/hide the sprite images when the box is checked.
@@ -48,6 +47,7 @@ window.onload = function() {
 	})
 
 	/**
+		Question 3
 		15 points
 		Moderate
 		Add a font size to the select menu if the input is a number.
@@ -59,16 +59,37 @@ window.onload = function() {
 		}
 	});
 
-
 	/** 
 		25 points
 		Hard 
-		Filter by closes name match
+		Filter by name
 		When search is cleared, show all pokemon as would appear on first load
 	**/
-	$(".search").keypress(function() {
+	$(".search").keyup(function() {
 		// when cleared must also reset cells
-		console.log($(this).val());
+		$(".results .row div").remove();
+
+		var name = $(this).val();
+
+		var newRequest = $.ajax({
+			type: 'GET',
+			url: "data/pokemon.json",
+			dataType: "json"
+		});
+
+		newRequest.done(function(data) {
+			//This is your array of pokemon.
+			var array = $.map(data, function(value, index) {
+	    		return [value];
+			});
+			//This is how we make the pokemon appear.
+			array.forEach(function(item) {
+				if (item.name.indexOf(name) != -1 || name == ''){
+					var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
+					$(".results .row").append(pokemon.render);
+				}
+			});
+		});
 
 	});
 
@@ -83,6 +104,7 @@ window.onload = function() {
 	$(".filter-select").change(function() {
 		console.log($(".filter-select :selected").text());
 	})
+
 }
 
 // pull 20 pokemon from the API
