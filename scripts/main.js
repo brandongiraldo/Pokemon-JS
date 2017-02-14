@@ -24,7 +24,7 @@ window.onload = function() {
 	/**
 		10 points
 		Easy 
-		Change the size of the weight element
+		Change the size of the weight and items elements
 		all .items and .weight classes
 	**/
 	$(".font-select").change(function() {
@@ -36,6 +36,7 @@ window.onload = function() {
 	/** 
 		10 points
 		Easy 
+		Show/hide the sprite images when the box is checked.
 		Do not use jQuery show / hide, cell text needs to retain location
 	**/
 	$(".toggle-sprites").change(function() {
@@ -72,7 +73,7 @@ window.onload = function() {
 	});
 
 	/** 
-		35 points (10 points for each filter)
+		40 points (10 points for each filter)
 		Hardest 
 		For name, alphabetical
 		For Weight, largest first
