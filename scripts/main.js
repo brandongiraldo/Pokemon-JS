@@ -1,5 +1,3 @@
-//filter, search, and pull 
-
 window.onload = function() {
 	var request = $.ajax({
 		type: 'GET',
@@ -7,25 +5,26 @@ window.onload = function() {
 		dataType: "json"
 	});
 
+
+
 	request.done(function(data) {
-		// var pokemon = new Pokemon(data.name, data.weight, data.sprites, data.stats, data.types, "full");
-		// console.log(pokemon);
-		// for(var i=0; i<10;i++) {
-		// 	$(".results .row").append(pokemon.render);
-		// }
+		//This is your array of pokemon.
 		var array = $.map(data, function(value, index) {
     		return [value];
 		});
 		console.log(array);
+		//This is how we make the pokemon appear.
 		array.forEach(function(item) {
 			var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
 			$(".results .row").append(pokemon.render);
 		});
+
 	});
 
 	/**
 		10 points
 		Easy 
+		Change the size of the weight and items elements
 		all .items and .weight classes
 	**/
 	$(".font-select").change(function() {
@@ -37,6 +36,7 @@ window.onload = function() {
 	/** 
 		10 points
 		Easy 
+		Show/hide the sprite images when the box is checked.
 		Do not use jQuery show / hide, cell text needs to retain location
 	**/
 	$(".toggle-sprites").change(function() {
@@ -47,8 +47,21 @@ window.onload = function() {
         }
 	})
 
+	/**
+		15 points
+		Moderate
+		Add a font size to the select menu if the input is a number.
+	**/
+	$("#addFontSize").click(function(){
+		var size = parseInt($("#fontSizeInput").val());
+		if (Number.isInteger(size)){
+			$('.custom-select').append('<option value="'+size+'">'+size+'</option>');
+		}
+	});
+
+
 	/** 
-		40 points
+		25 points
 		Hard 
 		Filter by closes name match
 		When search is cleared, show all pokemon as would appear on first load
