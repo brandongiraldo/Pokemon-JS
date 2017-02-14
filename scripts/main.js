@@ -3,16 +3,24 @@
 window.onload = function() {
 	var request = $.ajax({
 		type: 'GET',
-		url: "data/sample.json",
+		url: "data/pokemon.json",
 		dataType: "json"
 	});
 
 	request.done(function(data) {
-		var pokemon = new Pokemon(data.name, data.weight, data.sprites, data.stats, data.types, "full");
-		console.log(pokemon);
-		for(var i=0; i<10;i++) {
+		// var pokemon = new Pokemon(data.name, data.weight, data.sprites, data.stats, data.types, "full");
+		// console.log(pokemon);
+		// for(var i=0; i<10;i++) {
+		// 	$(".results .row").append(pokemon.render);
+		// }
+		var array = $.map(data, function(value, index) {
+    		return [value];
+		});
+		console.log(array);
+		array.forEach(function(item) {
+			var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
 			$(".results .row").append(pokemon.render);
-		}
+		});
 	});
 
 	/**
