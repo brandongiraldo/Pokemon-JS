@@ -27,15 +27,15 @@ class Pokemon {
 	}
 
 	renderTypes() {
-		var stringBuilder;
+		var stringBuilder = '';
 		this.types.forEach(function(item) {
 			stringBuilder+='<div class="item">'+item.type.name+'</div>';
 		});
-		return stringBuilder;	
+		return stringBuilder;
 	}
 	
 	renderStats() {
-		var stringBuilder;
+		var stringBuilder = '';
 		this.stats.forEach(function(item) {
 			stringBuilder+='<div class="item">'+item.stat.name+': '+'<div class="int">'+item.base_stat+'</div>'+'</div>';
 		});
