@@ -2,7 +2,7 @@
 	
 	This file was used to grab pokemon from the API.
 	It has nothing to do with this homework assignment.
-	Do not import, or use this file.
+	Do not import, edit, or use this file.
 	
 **/
 

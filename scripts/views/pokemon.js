@@ -42,7 +42,7 @@ class Pokemon {
 
 	// Builds the list items of types for each pokemon
 	renderTypes() {
-		var stringBuilder = '';
+		var stringBuilder = "";
 		this.types.forEach(function(item) {
 			stringBuilder+='<div class="item">'+item.type.name+'</div>';
 		});
@@ -51,7 +51,7 @@ class Pokemon {
 
 	// Builds the list items of stats for each pokemon
 	renderStats() {
-		var stringBuilder = '';
+		var stringBuilder = "";
 		this.stats.forEach(function(item) {
 			stringBuilder+='<div class="item">'+item.stat.name+': '+'<div class="int">'+item.base_stat+'</div>'+'</div>';
 		});
