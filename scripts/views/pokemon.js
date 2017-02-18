@@ -1,4 +1,17 @@
+/**
+
+	This is the declaration of a Pokemon class
+	It is designed to output each pokemon within a cell on the page
+	You will be required to use the constructor and the render function
+	from this class.
+
+	You are not to touch this file.
+**/
+
+
 class Pokemon {
+	// class constructor, keep renderer as "full" as the compressed view
+	// was not implmeneted for this homework
 	constructor(name, weight, sprites, stats, types, renderer) {
 		this.name = name;
 		this.weight = weight;
@@ -12,6 +25,7 @@ class Pokemon {
 		return this.renderFull();
 	}
 
+	// returns the html to be rendered on the page
 	renderFull() {
 		var stats = this.renderStats();
 		var types = this.renderTypes();
@@ -26,6 +40,7 @@ class Pokemon {
 				</div>';
 	}
 
+	// Builds the list items of types for each pokemon
 	renderTypes() {
 		var stringBuilder;
 		this.types.forEach(function(item) {
@@ -33,7 +48,8 @@ class Pokemon {
 		});
 		return stringBuilder;	
 	}
-	
+
+	// Builds the list items of stats for each pokemon
 	renderStats() {
 		var stringBuilder;
 		this.stats.forEach(function(item) {
