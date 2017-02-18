@@ -1,19 +1,36 @@
 /**
-	
+
+	INFO/CS 2300 Spring 2017 - Homework 1
+	Created By: Batya Zamansky and Brandon Giraldo
+
 	This is main.js, the file (and only file) you will edit to test your work.
 
 	This file has 5 problems, each outlined in a comment. You must write your solutions
-	between //START CODE HERE and //END CODE HERE for each question.
+	between //START CODE QX and //END CODE QX for each question.
 
 	Right below this is an ajax call to a local resource, pokemon.json. You will need to use
-	this again for questions 4 and 5. Feel free to use lines 15 - 37 when building your solutions
-	for those questions.
+	this again for questions 4 and 5. Feel free to reuse --- START * --- to --- END * --- when 
+	building your solutions for those questions.
 
-	Do not edit pokemon.json or pokemon.js. Again, this is the only file you will need to edit.
+	Do not edit data/pokemon.json or pokemon.js. Again, this is the only file you will need to edit.
+
+	You can (and are encouraged to) use console.log() to debug your work as you work along. Also check
+	the DOM using the inspector to know exactly where your html result is going to be outputted to. Use
+	jQuery as nessesary. (exception in question 2 with show/hide functions)
+
+	You must run this on a local server, since this file make an ajax request, most browsers will throw
+	an error if you try to load data from an external source while not running on a server. 
+	You can read more about that here:
+
+	https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+
+	Have fun!
 
 **/
 
 window.onload = function() {
+	// --- START OF AJAX CALL ---
+
 	// ajax call to pokemon.json
 	var request = $.ajax({
 		type: 'GET',
@@ -39,68 +56,108 @@ window.onload = function() {
 		});
 	});
 
+	// --- END OF AJAX CALL ---
+
 	/**
-		Question 1 - Change font-size
+		Question 1 - Changing font-size
 		10 points 
+
 		Change the size of the weight and items elements
-		target the .items and .weight class
+		based on the selected value of .font-select
+
+		target the .items and .weight classes
 	**/
 	$(".font-select").change(function() {
 		// START CODE Q1
 
+
+
 		// END CODE Q1
+
+
+		// ANSWER BELOW
 		var font = $(".font-select :selected").text();
 		$(".item").css("font-size", font + "px");
 		$(".weight").css("font-size", font+ "px");
+		// END ANSWER
 	});
 
 	/** 
 		Question 2 - Show/Hide
-		10 points 
-		Show/hide the sprite images when the box is checked/unchecked.
+		10 points
+
+		Show/hide the all sprite images when the box is checked/unchecked.
 		Do not use jQuery show / hide functions, cell text formatting needs to be retained.
+
+		In other words, the sprites should not be 'visible'.
 	**/
 	$(".toggle-sprites").change(function() {
 		// START CODE Q2
 
+
+
 		// END CODE Q2
+
+
+		// ANSWER BELOW
 		if ($(this).is(":checked")) {
             $(".cell img").css("visibility", "hidden");
         } else {
         	$(".cell img").css("visibility", "visible");
         }
+        // END ANSWER
 	})
 
 	/**
 		Question 3 - Adding a font-size
 		15 points
+
 		Add a font size to the select menu if the input is a number.
-		Look at the DOM to make sure you append the value to the right drop down.
-		Make sure its an int, validate that it is between 5 - 22, otherwise ignore it
+		You must check that it is a number.
+		Look at the DOM to make sure you append the value to the right drop down menu.
+		Also validate that it is between 5 - 22, otherwise ignore it completely
 	**/
-	$("#addFontSize").click(function(){
+	$(".add-font-size").click(function(){
 		// START CODE Q3
 
+
+
 		// END CODE Q3
-		var size = parseInt($("#fontSizeInput").val());
+
+
+		// ANSWER BELOW
+		var size = parseInt($(".add-font-size").val());
 		if (Number.isInteger(size)){
-			$('.custom-select').append('<option value="'+size+'">'+size+'</option>');
+			$('.font-select').append('<option value="'+size+'">'+size+'</option>');
 		}
+		// END ANSWER
 	});
 
 	/** 
 		Question 4 - Search
 		25 points
+
 		Filter by pokemon name. You will need to make an ajax call to pokemon.json
-		You need to check the inputed value from the DOM against the name of each pokemon
-		from the returned ajax call.
+		You need to check the inputed value from search field against the name of 
+		each pokemon from the returned ajax call.
 
 		When search is cleared, show all pokemon as would appear on first load
 
 		Be sure to clear the .row class before appending to the DOM
+
+		Look at --- START * --- to --- END * ---
 	**/
 	$(".search").keyup(function() {
-		// when cleared must also reset cells
+		// START CODE Q4
+
+
+
+
+		// END CODE Q4
+		
+
+
+		// ANSWER BELOW
 		$(".results .row div").remove();
 
 		var name = $(this).val();
@@ -124,39 +181,49 @@ window.onload = function() {
 				}
 			});
 		});
-
+		// END ANSWER
 	});
 
 	/** 
 		Question 5 - Sort by
 		40 points (10 points for each sort)
+
 		For name, alphabetical
 		For Weight, largest first
-		For Stats, largest sum first
+		For Stats, largest sum of all stats first
 		For Types, most types first
 
 		You will need to make an ajax call to pokemon.json
 		You need to check the inputed value from the DOM 
 		against a field (or newly computed field) of the pokemon from the returned call
 
-		Be sure to clear the .row class before appending to the DOM
+		Be sure to clear the .row class before appending to the DOM if you use append()
 
 		You should use either a series of if else statments or switch statements to handle
 		either of the 4 types of sorting.
-	**/
-	$(".filter-select").change(function() {
 
+		This resource may be helpful in organizing the data
+		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+	**/
+	$(".sort-select").change(function() {
+		// START CODE Q5
+
+
+
+
+		// END CODE Q5
+
+
+
+		// ANSWER BELOW
 		$(".results .row div").remove();
-		var filter = $(".filter-select :selected").text();
+		var filter = $(".sort-select :selected").text();
 
 		var newRequest = $.ajax({
 			type: 'GET',
 			url: "data/pokemon.json",
 			dataType: "json"
 		});
-
-		// This resource may be helpful in organizing the data
-		//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 
 		newRequest.done(function(data) {
 			//This is your array of pokemon.
@@ -215,6 +282,6 @@ window.onload = function() {
 				$(".results .row").append(pokemon.render);	
 			});
 		});
-	})
-
+		// END ANSWER
+	});
 }

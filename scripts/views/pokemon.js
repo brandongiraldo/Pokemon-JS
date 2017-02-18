@@ -3,7 +3,7 @@
 	This is the declaration of a Pokemon class
 	It is designed to output each pokemon within a cell on the page
 	You will be required to use the constructor and the render function
-	from this class.
+	from this class in questions 4 and 5.
 
 	You are not to touch this file.
 **/
@@ -21,11 +21,13 @@ class Pokemon {
 		this.renderer = renderer;
 	}
 
+	// call this render function to return the html output
 	get render() {
 		return this.renderFull();
 	}
 
 	// returns the html to be rendered on the page
+	// called from the render getter function above
 	renderFull() {
 		var stats = this.renderStats();
 		var types = this.renderTypes();
