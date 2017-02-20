@@ -8,7 +8,7 @@
 	This file has 5 problems, each outlined in a comment. You must write your solutions
 	between //START CODE QX and //END CODE QX for each question.
 
-	Right below this is an ajax call to a local resource, pokemon.json. You will need to use
+	The first code in this file is an ajax call to a local resource, pokemon.json. You will need to use
 	this again for questions 4 and 5. Feel free to reuse --- START * --- to --- END * --- when 
 	building your solutions for those questions.
 
@@ -18,7 +18,9 @@
 	the DOM using the inspector to know exactly where your html result is going to be outputted to. Use
 	jQuery as nessesary. (exception in question 2 with show/hide functions)
 
-	You must run this on a local server, since this file make an ajax request, most browsers will throw
+	Though there are not any PHP files in this assignment, you must run it on a 
+	server (local on your computer or on the course server) since there is an 
+	ajax call to a resource. Most browsers will throw
 	an error if you try to load data from an external source while not running on a server. 
 	You can read more about that here:
 
@@ -41,13 +43,13 @@ window.onload = function() {
 	// When the call is complete, we have access to the data
 	request.done(function(data) {
 		// This is your array of pokemon, the data was converted into an object array
-		var array = $.map(data, function(value, index) {
+		var pokemonArray = $.map(data, function(value, index) {
     		return [value];
 		});
 		// show the array of pokemon objects
-		console.log(array);
+		console.log(pokemonArray);
 		// Loop over the objects in the array
-		array.forEach(function(item) {
+		pokemonArray.forEach(function(item) {
 			// making a new instance of the Pokemon object while looping over the pokemon objects from
 			// the array. Be sure to look at the properties of each object in the console.
 			var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
@@ -62,10 +64,10 @@ window.onload = function() {
 		Question 1 - Changing font-size
 		10 points 
 
-		Change the size of the weight and items elements
+		Change the font size of the pokemon weight and pokemon item elements
 		based on the selected value of .font-select
 
-		target the .items and .weight classes
+		target the .item and .weight classes
 	**/
 	$(".font-select").change(function() {
 		// START CODE Q1
@@ -127,6 +129,7 @@ window.onload = function() {
 
 		// ANSWER BELOW
 		var size = parseInt($(".add-font-size").val());
+		console.log(size);
 		if (Number.isInteger(size)){
 			$('.font-select').append('<option value="'+size+'">'+size+'</option>');
 		}
