@@ -42,7 +42,7 @@ window.onload = function() {
 
 	// When the call is complete, we have access to the data
 	request.done(function(data) {
-		// This is your array of pokemon, the data was converted into an object array
+		// This is your s of pokemon, the data was converted into an object array
 		var pokemonArray = $.map(data, function(value, index) {
     		return [value];
 		});
@@ -150,7 +150,7 @@ window.onload = function() {
 
 		When search is cleared, show all pokemon as would appear on first load
 
-		Be sure to clear the .row class before appending to the DOM
+		Be sure to clear existing entries from the display before appending new items to the DOM
 
 		Look at --- START * --- to --- END * ---
 	**/
@@ -210,15 +210,15 @@ window.onload = function() {
 		You need to check the inputed value from the DOM 
 		against a field (or newly computed field) of the pokemon from the returned call
 
-		Be sure to clear the .row class before appending to the DOM if you use append()
+		Be sure to clear existing entries from the display before appending new items to the DOM
 
 		You should use either a series of if else statments or switch statements to handle
-		either of the 4 types of sorting.
+		the 4 types of sorting.
 
 		This resource may be helpful in organizing the data
 		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 	**/
-	$(".sort-select").change(function() {
+	$("#sort-select").change(function() {
 		// START CODE Q5
 
 
@@ -226,11 +226,12 @@ window.onload = function() {
 
 		// END CODE Q5
 
-
+		// Remember to upload this file to your server account and upload ready.js to CMS
+		// to indicate you are ready for grading
 
 		// ANSWER BELOW
 		$(".results .row div").remove();
-		var filter = $(".sort-select :selected").text();
+		var filter = $("#sort-select :selected").val();
 
 		var newRequest = $.ajax({
 			type: 'GET',
@@ -240,12 +241,12 @@ window.onload = function() {
 
 		newRequest.done(function(data) {
 			//This is your array of pokemon.
-			var array = $.map(data, function(value, index) {
+			var pokemonArray = $.map(data, function(value, index) {
 	    		return [value];
 			});
-			console.log(array);
+			console.log(pokemonArray);
 
-			if (filter == "Name"){
+			if (filter == "name"){
 				function compareString(a, b) {
 				  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
 				  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -258,15 +259,15 @@ window.onload = function() {
 				  // names must be equal
 				  return 0;
 				}
-				array.sort(compareString);
+				pokemonArray.sort(compareString);
 			}
-			else if (filter == "Weight"){
+			else if (filter == "weight"){
 				function compareWeight(a,b){
 					return b.weight-a.weight;
 				}
-				array.sort(compareWeight);
+				pokemonArray.sort(compareWeight);
 			}
-			else if (filter == "Stats"){
+			else if (filter == "statistics"){
 				function compareStats(a,b){
 					var aStats = 0;
 					var bStats = 0;
@@ -278,19 +279,19 @@ window.onload = function() {
 					}
 					return bStats - aStats;
 				}	
-				array.sort(compareStats);
+				pokemonArray.sort(compareStats);
 			}
-			else if (filter == "Types"){
+			else if (filter == "types"){
 				function compareTypes(a,b){
 					var aTypes = a.types.length;
 					var bTypes = b.types.length;
 					return bTypes-aTypes;
 				}
-				array.sort(compareTypes);
+				pokemonArray.sort(compareTypes);
 			}
 
 			//This is how we make the pokemon appear.
-			array.forEach(function(item) {
+			pokemonArray.forEach(function(item) {
 				var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
 				$(".results .row").append(pokemon.render);	
 			});
