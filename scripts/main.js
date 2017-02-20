@@ -3,25 +3,25 @@
 	INFO/CS 2300 Spring 2017 - Homework 1
 	Created By: Batya Zamansky and Brandon Giraldo
 
-	This is main.js, the file (and only file) you will edit for this assignment.
+	This is main.js, the file (and only file) you will edit to test your work.
 
 	This file has 5 problems, each outlined in a comment. You must write your solutions
 	between //START CODE QX and //END CODE QX for each question.
 
 	The first code in this file is an ajax call to a local resource, pokemon.json. You will need to use
-	this again for questions 4 and 5. Feel free to reuse --- START * --- to --- END * --- when 
+	this again for questions 4 and 5. Feel free to reuse --- START * --- to --- END * --- when
 	building your solutions for those questions.
 
 	Do not edit data/pokemon.json or pokemon.js. Again, this is the only file you will need to edit.
 
 	You can (and are encouraged to) use console.log() to debug your work as you work along. Also check
 	the DOM using the inspector to know exactly where your html result is going to be outputted to. Use
-	jQuery as nessesary. (exception in question 2 with show/hide functions)
+	jQuery as necessary. (exception in question 2 with show/hide functions)
 
-	Though there are not any PHP files in this assignment, you must run it on a 
-	server (local on your computer or on the course server) since there is an 
+	Though there are not any PHP files in this assignment, you must run it on a
+	server (local on your computer or on the course server) since there is an
 	ajax call to a resource. Most browsers will throw
-	an error if you try to load data from an external source while not running on a server. 
+	an error if you try to load data from an external source while not running on a server.
 	You can read more about that here:
 
 	https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
@@ -42,7 +42,7 @@ window.onload = function() {
 
 	// When the call is complete, we have access to the data
 	request.done(function(data) {
-		// This is your s of pokemon, the data was converted into an object array
+		// This is your array of pokemon, the data was converted into an object array
 		var pokemonArray = $.map(data, function(value, index) {
     		return [value];
 		});
@@ -62,7 +62,7 @@ window.onload = function() {
 
 	/**
 		Question 1 - Changing font-size
-		10 points 
+		10 points
 
 		Change the font size of the pokemon weight and pokemon item elements
 		based on the selected value of #font-select
@@ -84,11 +84,12 @@ window.onload = function() {
 		// END ANSWER
 	});
 
-	/** 
+	/**
 		Question 2 - Show/Hide
 		10 points
 
 		Show/hide the all sprite images when the box is checked/unchecked.
+
 		Do not use jQuery show / hide functions, cell text formatting needs to be retained.
 
 		In other words, the sprites should not be 'visible'.
@@ -119,6 +120,9 @@ window.onload = function() {
 		Look at the DOM to make sure you append the value to the right drop down menu.
 		Also validate that it is between 5 - 22, otherwise ignore it completely
 
+		Clear the add-font text field once the accepted number has been appended to
+		the right drop down menu
+
 		It is OK if the resulting selections do not display in order
 	**/
 	$("#add-font-size").click(function(){
@@ -138,12 +142,12 @@ window.onload = function() {
 		// END ANSWER
 	});
 
-	/** 
+	/**
 		Question 4 - Search
 		25 points
 
 		Filter by pokemon name. You will need to make an ajax call to pokemon.json
-		You need to check the inputed value from search field against the name of 
+		You need to check the inputed value from search field against the name of
 		each pokemon from the returned ajax call.
 
 		The search should be case insensitive. Searching for "Wa" or "wa" should display Wartortle.
@@ -161,7 +165,7 @@ window.onload = function() {
 
 
 		// END CODE Q4
-		
+
 
 
 		// ANSWER BELOW
@@ -197,7 +201,7 @@ window.onload = function() {
 		// END ANSWER
 	});
 
-	/** 
+	/**
 		Question 5 - Sort by
 		40 points (10 points for each sort)
 
@@ -207,13 +211,13 @@ window.onload = function() {
 		For Types, most types first
 
 		You will need to make an ajax call to pokemon.json
-		You need to check the inputed value from the DOM 
+		You need to check the inputed value from the DOM
 		against a field (or newly computed field) of the pokemon from the returned call
 
 		Be sure to clear existing entries from the display before appending new items to the DOM
 
-		You should use either a series of if else statments or switch statements to handle
-		the 4 types of sorting.
+		You should use either a series of if else statements or case statements to handle
+		either of the 4 types of sorting. If the default option is selected, dont to anything.
 
 		This resource may be helpful in organizing the data
 		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
@@ -278,7 +282,7 @@ window.onload = function() {
 						bStats += b.stats[i]['base_stats'];
 					}
 					return bStats - aStats;
-				}	
+				}
 				pokemonArray.sort(compareStats);
 			}
 			else if (filter == "types"){
@@ -293,9 +297,10 @@ window.onload = function() {
 			//This is how we make the pokemon appear.
 			pokemonArray.forEach(function(item) {
 				var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
-				$(".results .row").append(pokemon.render);	
+				$(".results .row").append(pokemon.render);
 			});
 		});
 		// END ANSWER
 	});
+
 }
