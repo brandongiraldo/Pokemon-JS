@@ -146,6 +146,8 @@ window.onload = function() {
 		You need to check the inputed value from search field against the name of 
 		each pokemon from the returned ajax call.
 
+		The search should be case insensitive. Searching for "Wa" or "wa" should display Wartortle.
+
 		When search is cleared, show all pokemon as would appear on first load
 
 		Be sure to clear the .row class before appending to the DOM
@@ -175,12 +177,18 @@ window.onload = function() {
 
 		newRequest.done(function(data) {
 			//This is your array of pokemon.
-			var array = $.map(data, function(value, index) {
+			var pokemonArray = $.map(data, function(value, index) {
 	    		return [value];
 			});
 			//This is how we make the pokemon appear.
-			array.forEach(function(item) {
-				if (item.name.indexOf(name) != -1 || name == ''){
+			pokemonArray.forEach(function(item) {
+				var searchString = $(".search").val();
+				//zero or more characters followed by the search string followed by zero or more characters
+				var search = new RegExp( "^.*" + searchString + ".*$", 'i');
+
+				//console.log( item.name + " " + search.test(item.name))
+
+				if (search.test(item.name)){
 					var pokemon = new Pokemon(item.name, item.weight, item.sprites, item.stats, item.types, "full");
 					$(".results .row").append(pokemon.render);
 				}
