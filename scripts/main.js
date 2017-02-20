@@ -6,7 +6,8 @@
 	This is main.js, the file (and only file) you will edit to test your work.
 
 	This file has 5 problems, each outlined in a comment. You must write your solutions
-	between //START CODE QX and //END CODE QX for each question.
+	between //START CODE QX and //END CODE QX for each question. No global variables/functions
+	are allowed. Do not edit prexisting code.
 
 	Right below this is an ajax call to a local resource, pokemon.json. You will need to use
 	this again for questions 4 and 5. Feel free to reuse --- START * --- to --- END * --- when 
@@ -16,7 +17,7 @@
 
 	You can (and are encouraged to) use console.log() to debug your work as you work along. Also check
 	the DOM using the inspector to know exactly where your html result is going to be outputted to. Use
-	jQuery as nessesary. (exception in question 2 with show/hide functions)
+	jQuery as necessary. (exception in question 2 with show/hide functions)
 
 	You must run this on a local server, since this file make an ajax request, most browsers will throw
 	an error if you try to load data from an external source while not running on a server. 
@@ -87,6 +88,7 @@ window.onload = function() {
 		10 points
 
 		Show/hide the all sprite images when the box is checked/unchecked.
+
 		Do not use jQuery show / hide functions, cell text formatting needs to be retained.
 
 		In other words, the sprites should not be 'visible'.
@@ -112,23 +114,28 @@ window.onload = function() {
 		Question 3 - Adding a font-size
 		15 points
 
-		Add a font size to the select menu if the input is a number.
-		You must check that it is a number.
+		Add a font size to the .font-select menu if the input is a number.
+
 		Look at the DOM to make sure you append the value to the right drop down menu.
-		Also validate that it is between 5 - 22, otherwise ignore it completely
+
+		Also validate that it is between 5 - 22, otherwise ignore it completely.
+
+		Clear the add-font text field once the accepted number has been appended to
+		the right drop down menu
 	**/
 	$(".add-font-size").click(function(){
 		// START CODE Q3
 
-
+		console.log("add");
 
 		// END CODE Q3
 
 
 		// ANSWER BELOW
-		var size = parseInt($(".add-font-size").val());
+		var size = parseInt($(".add-font").val());
+		console.log(size);
 		if (Number.isInteger(size)){
-			$('.font-select').append('<option value="'+size+'">'+size+'</option>');
+			$(".font-select").append('<option value="'+size+'">'+size+'</option>');
 		}
 		// END ANSWER
 	});
@@ -141,9 +148,7 @@ window.onload = function() {
 		You need to check the inputed value from search field against the name of 
 		each pokemon from the returned ajax call.
 
-		When search is cleared, show all pokemon as would appear on first load
-
-		Be sure to clear the .row class before appending to the DOM
+		When search is cleared, show all pokemon as would appear on first load.
 
 		Look at --- START * --- to --- END * ---
 	**/
@@ -199,8 +204,8 @@ window.onload = function() {
 
 		Be sure to clear the .row class before appending to the DOM if you use append()
 
-		You should use either a series of if else statments or switch statements to handle
-		either of the 4 types of sorting.
+		You should use either a series of if else statements or case statements to handle
+		either of the 4 types of sorting. If the default option is selected, dont to anything.
 
 		This resource may be helpful in organizing the data
 		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
