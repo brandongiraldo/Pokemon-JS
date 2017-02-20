@@ -65,11 +65,11 @@ window.onload = function() {
 		10 points 
 
 		Change the font size of the pokemon weight and pokemon item elements
-		based on the selected value of .font-select
+		based on the selected value of #font-select
 
 		target the .item and .weight classes
 	**/
-	$(".font-select").change(function() {
+	$("#font-select").change(function() {
 		// START CODE Q1
 
 
@@ -78,7 +78,7 @@ window.onload = function() {
 
 
 		// ANSWER BELOW
-		var font = $(".font-select :selected").text();
+		var font = $("#font-select :selected").val();
 		$(".item").css("font-size", font + "px");
 		$(".weight").css("font-size", font+ "px");
 		// END ANSWER
@@ -93,7 +93,7 @@ window.onload = function() {
 
 		In other words, the sprites should not be 'visible'.
 	**/
-	$(".toggle-sprites").change(function() {
+	$("#hide-sprites").change(function() {
 		// START CODE Q2
 
 
@@ -118,8 +118,10 @@ window.onload = function() {
 		You must check that it is a number.
 		Look at the DOM to make sure you append the value to the right drop down menu.
 		Also validate that it is between 5 - 22, otherwise ignore it completely
+
+		It is OK if the resulting selections do not display in order
 	**/
-	$(".add-font-size").click(function(){
+	$("#add-font-size").click(function(){
 		// START CODE Q3
 
 
@@ -128,10 +130,10 @@ window.onload = function() {
 
 
 		// ANSWER BELOW
-		var size = parseInt($(".add-font-size").val());
+		var size = parseInt($("#fontSizeInput").val());
 		console.log(size);
-		if (Number.isInteger(size)){
-			$('.font-select').append('<option value="'+size+'">'+size+'</option>');
+		if (Number.isInteger(size)  && size > 5 && size < 22 ){
+			$('#font-select').append('<option value="'+size+'">'+size+' pixels</option>');
 		}
 		// END ANSWER
 	});
