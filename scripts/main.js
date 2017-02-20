@@ -3,7 +3,7 @@
 	INFO/CS 2300 Spring 2017 - Homework 1
 	Created By: Batya Zamansky and Brandon Giraldo
 
-	This is main.js, the file (and only file) you will edit to test your work.
+	This is main.js, the file (and only file) you will edit for this assignment.
 
 	This file has 5 problems, each outlined in a comment. You must write your solutions
 	between //START CODE QX and //END CODE QX for each question.
